@@ -1,19 +1,8 @@
-import type React from "react";
 import { FaSearch } from "react-icons/fa";
+import { useMovieContext } from "../contexts/MovieContext";
 
-type SearchBarProps = {
-  className: string;
-  searchQuery: string;
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-  handleSearch: (e: React.FormEvent<HTMLFormElement>) => void;
-};
-
-function SearchBar({
-  className,
-  searchQuery,
-  setSearchQuery,
-  handleSearch,
-}: SearchBarProps) {
+function SearchBar({ className }: { className?: string }) {
+  const { searchQuery, setSearchQuery, handleSearch } = useMovieContext();
   return (
     <form onSubmit={handleSearch} className={className}>
       <input

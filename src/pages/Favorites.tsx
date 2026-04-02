@@ -1,20 +1,11 @@
-import { useMovieContext } from "../contexts/useContext";
+import { useMovieContext } from "../contexts/MovieContext";
 import MovieCard from "../components/MovieCard";
 import Modal from "../components/Modal";
-import type { Movie, MovieDetail } from "../services/api";
+import type { Movie } from "../services/api";
 
-type FavoritesProps = {
-  handleModal: (movie: Movie) => void;
-  selectedMovie: MovieDetail | null;
-  handleCloseModal: () => void;
-};
-
-function Favorites({
-  handleModal,
-  selectedMovie,
-  handleCloseModal,
-}: FavoritesProps) {
-  const { favorites } = useMovieContext();
+function Favorites() {
+  const { favorites, handleModal, selectedMovie, handleCloseModal } =
+    useMovieContext();
 
   if (favorites && favorites.length > 0) {
     return (

@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import type { Movie } from "../services/api";
+import { useFetch, type UseFetchReturn } from "../hooks/useFetch";
 
-interface MovieContextType {
+interface MovieContextType extends UseFetchReturn {
   favorites: Movie[];
   addToFavorites: (movie: Movie) => void;
   removeFromFavorites: (movieId: number) => void;
@@ -19,6 +20,8 @@ export const useMovieContext = (): MovieContextType => {
 };
 
 export const MovieProvider = ({ children }: React.PropsWithChildren) => {
+  const movieData = useFetch();
+
   const [favorites, setFavorites] = useState<Movie[]>([]);
 
   useEffect(() => {
@@ -43,6 +46,7 @@ export const MovieProvider = ({ children }: React.PropsWithChildren) => {
   };
 
   const value: MovieContextType = {
+    ...movieData,
     favorites,
     addToFavorites,
     removeFromFavorites,

@@ -1,5 +1,5 @@
 import { FaBookmark } from "react-icons/fa";
-import { useMovieContext } from "../contexts/useContext";
+import { useMovieContext } from "../contexts/MovieContext";
 import type { Movie } from "../services/api";
 import type React from "react";
 
@@ -23,7 +23,11 @@ function MovieCard({ movie, handleModal }: MovieCardProps) {
       <div className="w-full shrink-0 bg-gray-300 aspect-2/3 block relative">
         <img
           className="w-full h-full object-cover object-center block"
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          src={
+            movie.poster_path
+              ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+              : "https://via.placeholder.com/500x750?text=No+Image"
+          }
           alt={movie.title}
         />
         <FaBookmark

@@ -1,5 +1,5 @@
 import { FaBookmark } from "react-icons/fa";
-import { useMovieContext } from "../contexts/useContext";
+import { useMovieContext } from "../contexts/MovieContext";
 import type { MovieDetail } from "../services/api";
 import type React from "react";
 
@@ -101,11 +101,19 @@ function ModalDetail({ movie }: ModalDetailProps) {
           </div>
         </div>
         <div className="flex flex-wrap justify-center md:justify-start items-center text-[11px] md:text-xs lg:text-sm text-gray-600 gap-1.5 font-medium">
-          <span>{runtime(movie.runtime)}</span>
-          <span>|</span>
-          <span>{movie.genres?.map((genre) => genre.name).join(", ")}</span>
-          <span>|</span>
-          <span>{movie.release_date?.split("-")[0]}</span>
+          <span>{movie.runtime ? runtime(movie.runtime) : null}</span>
+          {movie.genres?.length > 0 && (
+            <>
+              <span>|</span>
+              <span>{movie.genres.map((g) => g.name).join(", ")}</span>
+            </>
+          )}
+          {movie.release_date && (
+            <>
+              <span>|</span>
+              <span>{movie.release_date.split("-")[0]}</span>
+            </>
+          )}
         </div>
         <p className="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed border-t border-b border-gray-100 py-3 my-1">
           {movie.overview}

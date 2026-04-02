@@ -1,27 +1,17 @@
 import type React from "react";
+import { useMovieContext } from "../contexts/MovieContext";
 import Modal from "../components/Modal";
 import MovieCard from "../components/MovieCard";
-import type { Movie, MovieDetail } from "../services/api";
 
-type ExploreProps = {
-  movies: Movie[];
-  children: React.ReactNode;
-  loading: boolean;
-  error: string | null;
-  handleModal: (movie: Movie) => void;
-  selectedMovie: MovieDetail | null;
-  handleCloseModal: () => void;
-};
-
-function Explore({
-  movies,
-  children,
-  loading,
-  error,
-  handleModal,
-  selectedMovie,
-  handleCloseModal,
-}: ExploreProps) {
+function Explore({ children }: React.PropsWithChildren) {
+  const {
+    movies,
+    loading,
+    error,
+    handleModal,
+    selectedMovie,
+    handleCloseModal,
+  } = useMovieContext();
   return (
     <>
       <section className="search-container max-w-5xl min-h-60 mx-auto mt-12 px-4 mb-20 relative z-10">
